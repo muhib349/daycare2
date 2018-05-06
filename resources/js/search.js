@@ -4,10 +4,10 @@ $(document).ready(function () {
         if(name != ''){
             $.ajax({
                 type :"POST",
-                url :"ajax/search.php",
+                url :"ajax/searchVerify.php",
                 data :{name:name},
                 success: function (data) {
-                    alert(data);
+                    $('#out').html(data);
                 }
                 });
         }

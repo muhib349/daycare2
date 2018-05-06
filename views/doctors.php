@@ -5,6 +5,23 @@
  * Date: 5/3/18
  * Time: 8:29 PM
  */
+session_start();
+
+include "../datasource/RetriveData.php";
+
+$obj = new RetriveData();
+
+if(isset($_GET['id'])){
+    $res = $obj->getDoctor($_GET['id']);
+    if($res->num_rows >0){
+        $rows = $res->fetch_assoc();
+    }
+}
+else{
+    header("Location:../index.php");
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +48,7 @@
                 </li>
 
                 <li class="nav-item active" style="margin-left:760px">
-                    <a class="nav-link" href="#">HOME</a>
+                    <a class="nav-link" href="../index.php">HOME</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">SERVICES</a>
@@ -46,60 +63,62 @@
                     <a class="nav-link" href="#">ABOUT_US</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">USER</a>
-                </li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><?php echo $_SESSION['username'] ?></a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">LOGIN</a>
+                    </li>
+                <?php endif; ?>
+
             </ul>
         </div>
     </div>
 </div>
-<div class="row"  style="margin-left: 40px;height: auto;width: 100%">
+<div class="row"  style="margin-left: 40px;height: auto;width: 100% ">
     <div class="col-md-6">
         <img src="../resources/images/dd.jpg" alt="">
 
     </div>
     <div class=" col-md-6" style="margin-top: 80px" >
-        <h2>Dr.Sams Manwar</h2>
-        <h5> <a href=""> Email </a> <br> Specialist <br> Degree </h5>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias totam, aperiam molestias illum voluptatem modi repellendus ab asperiores! Reprehenderit, ad neque adipisci odit ipsum asperiores, officiis tempora debitis fuga commodi!</p>
-        <h1>Make an apointment</h1><br>
+        <h2><?php echo $rows['firstname'].' '.$rows['lastname']?></h2>
+        <h5> <a href="#"> Email:<? echo $rows['email'] ?> </a> <br> <?php echo $rows['specialist']?></h5>
+        <p> <?php echo $rows['summery']?></p>
+        <h1>Available Day And Time</h1><br>
         <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Action</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
-                <td>Saturday-monday</td>
-                <td>Slot1</td>
-                <td>Available</td>
-            </tr>
-            <tr>
-                <td>tuesday-thursday</td>
-                <td>Slot2</td>
-                <td>Active</td>
-            </tr>
-            <tr>
-                <td>Sunday</td>
-                <td>12:30-2:30</td>
-                <td>Nonavailable</td>
-            </tr>
-            <tr>
-                <td>Monday</td>
-                <td>10:00-12:00</td>
-                <td>Not-Active</td>
+                <td><?php echo $rows['dayfrom'].'-'. $rows['dayto'] ?></td>
+                <td><?php echo $rows['timefrom'].'-'. $rows['timeto'] ?></td>
             </tr>
 
             </tbody>
         </table>
 
+        <div>
+            <h3>Make an appointment</h3>
+            <?php if (isset($_SESSION['username'])): ?>
+                <form>
+                    <div class="form-group">
+                        <label for="meeting">Meeting Date : </label>
+                        <input id="meeting" name="date" type="date" value="<?php echo date('m-d-y')?>" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="textarea" name="about" placeholder="About Your Baby"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+            <?php else: ?>
+                <label style="text-decoration-color: #721c24">You have to <a href="#">login</a> first</label>
+            <?php endif; ?>
+
+        </div>
     </div>
 
 
 </div>
-
+<script src="../resources/js/verifyDate.js"></script>
 </body>
 </html>

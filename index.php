@@ -95,7 +95,8 @@ if (isset($_GET['logout'])){
                             <div class="col-lg-12">
                                 <div class="text-center"><h3><b>Login</b></h3></div>
                                 <form  action="<?php echo $_SERVER['PHP_SELF']?>" method="post" role="form" autocomplete="off">
-                                    <div class="form-group">
+                                    <div class="form-group"><label for="username">Username</label>
+                                        <label><?php echo  $message ?></label>
                                         <label for="username">Username</label>
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off" required>
                                     </div>
@@ -145,6 +146,11 @@ if (isset($_GET['logout'])){
                  <div class="col-10">
                      <input class="form-control" type="search"  id="src" placeholder="search">
                  </div>
+             </div>
+             <div>
+                 <ul class="list-group" id="out">
+
+                 </ul>
              </div>
 
          </div>
