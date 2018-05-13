@@ -8,12 +8,15 @@
 
 include '../datasource/RetriveData.php';
 $obj = new RetriveData();
-$output='';
+//$output = '<li class="nav-item dropdown">'.'<div class="dropdown-menu">';
+$output ='';
 if(isset($_POST['name'])){
     $res = $obj->searchDoctors($_POST['name']);
     if($res->num_rows >0){
         while ($rows = $res->fetch_assoc()){
-           $output .= '<li class="list-group-item">'.'<a href="views/doctors.php?id='.$rows['doctor_id'].'">'.$rows['name'].'</a>'.'</li>';
+
+               $output .= '<a href="views/doctors.php?id='.$rows['doctor_id'].'">'.$rows['name'].'</a>';
+
         }
     }
     else{
