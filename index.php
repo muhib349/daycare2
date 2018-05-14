@@ -57,17 +57,14 @@ if (isset($_GET['logout'])){
 
                 <a class="navbar-brand" href="#"><img src="resources/images/Logo.png" height="70px"; width="165px"; alt=""></a>
             </div>
-
             <nav>
                 <form class="navbar-form navbar-left nav" style="margin-top: 10px;margin-left: 5px" role="search">
                     <div class="form-group">
                         <input type="text" id="src" class="form-control" placeholder="Search">
                     </div>
                 </form>
-
             </nav>
-
-            <ul class="navbar-nav nav" style="font-size: 15px;margin-left: 26%">
+            <ul class="navbar-nav nav" style="font-size: 15px;margin-left: 35%">
 
 
                 <li class="nav-item active" style="">
@@ -93,7 +90,7 @@ if (isset($_GET['logout'])){
 
                 <?php if(isset($_SESSION['username'])): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']?></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo strtoupper($_SESSION['username'])?></a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="views/parents.php">Doctor</a>
                             <a class="dropdown-item" href="#">Food Chart</a>
@@ -150,13 +147,11 @@ if (isset($_GET['logout'])){
         </div>
     </div>
 </div>
-<div class="container" style="margin-top: 3%">
-    <!-- complete this field for showing search item -->
-    <li id="out">
-
-    </li>
-
+<div class="container" style="margin-top: 5px">
     <div class=" ">
+        <ul id="out" style="background-color: #c6c8ca">
+
+        </ul>
         <div id="slider" class="carousel slide " data-ride="carousel">
             <ul class="carousel-indicators">
                 <li data-target="#slider" data-slide-to="0"class="active" ></li>

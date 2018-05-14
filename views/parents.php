@@ -5,6 +5,7 @@
  * Date: 5/14/18
  * Time: 1:30 AM
  */
+session_start();
 ?>
 
 
@@ -39,10 +40,10 @@
         <img src="../resources/images/Logo.png" style="height: 50px;width:120px; margin-right: 40%" alt="">
 
         <ul class="nav navbar-nav navbar-right" style="font-size: 20px">
-            <li class="active"><a href="#">Home </a></li>
+            <li class="active"><a href="../index.php">Home </a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Our team</a></li>
-            <li><a href="#">User</a></li>
+            <li><a href="#"><?php echo strtoupper($_SESSION['username'])?></a></li>
 
         </ul>
 

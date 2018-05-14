@@ -15,12 +15,12 @@ if(isset($_POST['name'])){
     if($res->num_rows >0){
         while ($rows = $res->fetch_assoc()){
 
-               $output .= '<a href="views/doctors.php?id='.$rows['doctor_id'].'">'.$rows['name'].'</a>';
+               $output .= '<li style="font-size: 20px"><a href="views/doctors.php?id='.$rows['doctor_id'].'">'.$rows['name'].'</a>'.'</li>';
 
         }
     }
     else{
-        $output.='<li>No Result Found</li>';
+        $output.='<li style="font-size: 20px">No Result Found</li>';
     }
     echo $output;
 }
